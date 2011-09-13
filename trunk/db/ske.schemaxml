@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_unicode_ci">diem</database>
+</source>
+<canvas zoom="120">
+<tables>
+<table name="score_term" view="colnames">
+<left>727</left>
+<top>143</top>
+<width>134</width>
+<height>230</height>
+<sql_create_table>CREATE TABLE `score_term` (
+  `student_id` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `term_name` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_id` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `mid_term` double DEFAULT NULL,
+  `end_term` double DEFAULT NULL,
+  `avg` double DEFAULT NULL,
+  `group` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`student_id`,`term_name`,`subject_id`),
+  KEY `subject_id` (`subject_id`),
+  KEY `term_name` (`term_name`),
+  CONSTRAINT `score_term_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `score_term_ibfk_3` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  CONSTRAINT `score_term_ibfk_4` FOREIGN KEY (`term_name`) REFERENCES `term` (`term_name`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="student" view="colnames">
+<left>31</left>
+<top>70</top>
+<width>152</width>
+<height>128</height>
+<sql_create_table>CREATE TABLE `student` (
+  `student_id` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `student_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="subject" view="colnames">
+<left>934</left>
+<top>46</top>
+<width>151</width>
+<height>149</height>
+<sql_create_table>CREATE TABLE `subject` (
+  `subject_id` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `credit` int(2) DEFAULT NULL,
+  PRIMARY KEY (`subject_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="term" view="colnames">
+<left>559</left>
+<top>485</top>
+<width>134</width>
+<height>108</height>
+<sql_create_table>CREATE TABLE `term` (
+  `term_name` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`term_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="term_stat" view="colnames">
+<left>260</left>
+<top>368</top>
+<width>169</width>
+<height>230</height>
+<sql_create_table>CREATE TABLE `term_stat` (
+  `term_name` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
+  `student_id` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `num_cre_reg` int(3) DEFAULT NULL,
+  `num_cre_pass` int(3) DEFAULT NULL,
+  `avg_grade_term` double DEFAULT NULL,
+  `num_cre_all` int(3) DEFAULT NULL,
+  `avg_grade_all` double DEFAULT NULL,
+  PRIMARY KEY (`term_name`,`student_id`),
+  KEY `FK_term` (`student_id`),
+  CONSTRAINT `FK_term` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `term_stat_ibfk_1` FOREIGN KEY (`term_name`) REFERENCES `term` (`term_name`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
