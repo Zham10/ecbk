@@ -9,10 +9,11 @@ function connect_db (){
     //echo 'Connected';
     $db = mysql_select_db('diem',$con) or die('Cannot select database!');
     //echo 'Selected';
+    mysql_set_charset('utf8');
     return $con;
 }
-function close_db($con){
-    mysql_close($con);
+function close_db(){
+    mysql_close();
 }
 function check_exits($obj, $table, $col){
     $query = 'SELECT * FROM '.$table.' WHERE '.$col .'= '.$obj;
