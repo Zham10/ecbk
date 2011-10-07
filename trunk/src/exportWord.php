@@ -40,8 +40,8 @@
 		'font-size'		=> '18pt',
 		'color'			=> 'blue'
     );
-    //$doc->addImage('http://localhost/ec/file/bk_hcm.gif',70,70);
-	$doc->addParagraph('<img src="http://localhost/ec/file/bk_hcm.gif"/>Truong Dai hoc Bach Khoa Tp. Ho Chi Minh', $format);
+    
+	$doc->addParagraph('<img src="../file/bk_hcm.gif"/>Truong Dai hoc Bach Khoa Tp. Ho Chi Minh', $format);
 	
    $format = array(
 		'text-align' 	=> 'center',
